@@ -68,4 +68,17 @@ public class UtilisateurService {
         validation.setActivation(Instant.now());
         validationService.updateValidation(validation);
     }
+
+    // Nouvelle methode pour redemander un code
+    public void resendActivation(String email){
+        Utilisateur utilisateur = utilisateurRespository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
+
+        if(utilisateur.isActif()){
+            throw new RuntimeException("Utilisateur déjà activé");
+        }
+
+
+        validationService.enregister(utilisateur); // genere et envoie un nouveau code
+    }
 }

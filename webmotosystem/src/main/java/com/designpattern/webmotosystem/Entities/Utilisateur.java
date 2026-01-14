@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -17,13 +18,35 @@ public class Utilisateur implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
     private String nom;
+
+    @Column(nullable = false)
     private String email;
+
+    @Embedded
+    private Adresse adresse;
+
     private boolean actif = false;
 
+    private LocalDateTime dateInscription;
+    @PrePersist
+    protected void onCreate() {
+        this.dateInscription = LocalDateTime.now();
+    }
+
     @Enumerated(EnumType.STRING)
+    @Column(length = 50)
     private Role role;
+
+
+    // Champs specifiques aux societes
+    @Column(nullable = true) private String raisonSociale;
+
+    @Column(nullable = true) private String numeroRegistreCommerce;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -65,4 +88,36 @@ public class Utilisateur implements UserDetails {
     public void setActif(boolean actif) { this.actif = actif; }
     public Role getRole() { return role; }
     public void setRole(Role role) { this.role = role; }
+
+    public Adresse getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(Adresse adresse) {
+        this.adresse = adresse;
+    }
+
+    public LocalDateTime getDateInscription() {
+        return dateInscription;
+    }
+
+    public void setDateInscription(LocalDateTime dateInscription) {
+        this.dateInscription = dateInscription;
+    }
+
+    public String getRaisonSociale() {
+        return raisonSociale;
+    }
+
+    public void setRaisonSociale(String raisonSociale) {
+        this.raisonSociale = raisonSociale;
+    }
+
+    public String getNumeroRegistreCommerce() {
+        return numeroRegistreCommerce;
+    }
+
+    public void setNumeroRegistreCommerce(String numeroRegistreCommerce) {
+        this.numeroRegistreCommerce = numeroRegistreCommerce;
+    }
 }
