@@ -2,9 +2,6 @@ package com.designpattern.webmotosystem.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -25,14 +22,8 @@ public class ConfigSecurityApp {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        // Endpoints publics
-                        .requestMatchers(HttpMethod.POST, "/inscription").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/activation").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/resend-activation").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .requestMatchers("/error").permitAll()
-                        .requestMatchers("**").permitAll()
-                        .anyRequest().authenticated()
+                        // 👉 Autoriser toutes les requêtes pour les tests
+                        .anyRequest().permitAll()
                 )
 
                 .addFilterBefore(jwtAuthFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
