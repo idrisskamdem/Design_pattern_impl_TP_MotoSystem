@@ -2,6 +2,9 @@ package com.designpattern.webmotosystem.Security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -22,13 +25,27 @@ public class ConfigSecurityApp {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        // 👉 Autoriser toutes les requêtes pour les tests
-                        .anyRequest().permitAll()
+                        // Endpoints publics
+                        .requestMatchers(HttpMethod.POST, "/inscription").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/activation").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/resend-activation").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/documents/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/panier/**").permitAll()
+                        .requestMatchers("/error").permitAll()
+                        .requestMatchers("/**").permitAll()
+                        .anyRequest().authenticated()
                 )
+           .headers(headers -> headers
+    .contentSecurityPolicy(csp -> csp
+        .policyDirectives("frame-ancestors 'self' http://localhost:5173")
+    )
+)
 
                 .addFilterBefore(jwtAuthFilter, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+    
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {

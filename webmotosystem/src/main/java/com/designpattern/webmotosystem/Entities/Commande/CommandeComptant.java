@@ -9,6 +9,7 @@ public class CommandeComptant extends Commande {
 
     @Override
     public double calculerFraisSpecifique() {
+        // Pas de frais supplémentaires pour une commande comptant
         return 0.0;
     }
 }

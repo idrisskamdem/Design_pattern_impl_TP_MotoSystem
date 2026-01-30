@@ -9,7 +9,7 @@ public class CommandeCredit extends Commande {
 
     @Override
     public double calculerFraisSpecifique() {
-        // exemple: frais de credit de 10% du montant base
+        // Exemple : frais de crédit = 10% du montant
         return getMontant() * 0.10;
     }
 }

@@ -5,7 +5,7 @@ import com.designpattern.webmotosystem.Entities.Role;
 import com.designpattern.webmotosystem.Entities.client.ClientEntreprise;
 import com.designpattern.webmotosystem.Entities.client.Filiale;
 import com.designpattern.webmotosystem.Entities.client.Societe;
-import com.designpattern.webmotosystem.Repositories.UtilisateurRespository;
+import com.designpattern.webmotosystem.Repositories.UtilisateurRepository; // Correction ici
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,23 +19,24 @@ import java.util.List;
 @AllArgsConstructor
 public class ClientService {
 
-    private final UtilisateurRespository utilisateurRespository;
+    // Nom corrigé pour correspondre à l'interface réelle
+    private final UtilisateurRepository utilisateurRepository;
 
     /**
      * Retourne une societe avec ses filiales sous forme de Composite.
      */
     public ClientEntreprise construireSocieteAvecFiliales(int societeId) {
-        Utilisateur societe = utilisateurRespository.findById(societeId)
-                .orElseThrow(() -> new RuntimeException("Societe introuvable"));
+        Utilisateur societe = utilisateurRepository.findById(societeId)
+                .orElseThrow(() -> new RuntimeException("Société introuvable"));
 
         if (societe.getRole() != Role.SOCIETE) {
-            throw new RuntimeException("Cet utilisateur n'est pas une societe");
+            throw new RuntimeException("Cet utilisateur n'est pas une société");
         }
 
         Societe composite = new Societe(societe);
 
-        // On recupere toutes les filiales rattachees a cette societe
-        List<Utilisateur> filiales = utilisateurRespository.findByRole(Role.CLIENT);
+        // On récupère toutes les filiales rattachées à cette société
+        List<Utilisateur> filiales = utilisateurRepository.findByRole(Role.CLIENT);
 
         for (Utilisateur f : filiales) {
              composite.ajouter(new Filiale(f));

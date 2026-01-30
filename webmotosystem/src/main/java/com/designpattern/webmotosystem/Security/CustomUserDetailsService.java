@@ -1,8 +1,9 @@
 package com.designpattern.webmotosystem.Security;
 
 import com.designpattern.webmotosystem.Entities.Utilisateur;
-import com.designpattern.webmotosystem.Repositories.UtilisateurRespository;
+import com.designpattern.webmotosystem.Repositories.UtilisateurRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.DisabledException; // Import manquant ajouté ici
 import org.springframework.security.core.userdetails.*;
 import org.springframework.stereotype.Service;
 
@@ -10,25 +11,24 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UtilisateurRespository utilisateurRespository;
+    private final UtilisateurRepository utilisateurRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        // On cherche l'utilisateur par email
-        Utilisateur utilisateur = utilisateurRespository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Utilisateur introuvable"));
+        // Recherche par email car l'ID est retiré du token JWT
+        Utilisateur utilisateur = utilisateurRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Utilisateur introuvable avec l'email : " + email));
 
-        // Verification si le compte est active
+        // Vérification du statut du compte
         if (!utilisateur.isActif()) {
-            throw new RuntimeException("Compte non activé");
+            throw new DisabledException("Compte non activé. Veuillez vérifier vos emails.");
         }
 
-        // Construction de l'objet UserDetails que Spring Security comprend
+        // Retourne l'utilisateur pour Spring Security
         return User.builder()
                 .username(utilisateur.getEmail())
-                .password(utilisateur.getPassword()) // déjà encodé avec BCrypt
-                .roles(utilisateur.getRole().name()) // ex: USER, ADMIN
+                .password(utilisateur.getPassword()) 
+                .roles(utilisateur.getRole().name()) 
                 .build();
     }
 }
-

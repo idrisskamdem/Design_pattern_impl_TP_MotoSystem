@@ -3,7 +3,7 @@ package com.designpattern.webmotosystem.Services;
 import com.designpattern.webmotosystem.Entities.Utilisateur;
 import com.designpattern.webmotosystem.Entities.Validation;
 import com.designpattern.webmotosystem.Entities.Role;
-import com.designpattern.webmotosystem.Repositories.UtilisateurRespository;
+import com.designpattern.webmotosystem.Repositories.UtilisateurRepository; // Correction ici
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,8 @@ import java.util.Map;
 @AllArgsConstructor
 @Service
 public class UtilisateurService {
-    private final UtilisateurRespository utilisateurRespository;
+    // Correction du nom de la variable et du type
+    private final UtilisateurRepository utilisateurRepository; 
     private final ValidationService validationService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -26,30 +27,31 @@ public class UtilisateurService {
             throw new RuntimeException("Adresse mail invalide");
         }
 
-        if(utilisateurRespository.findByEmail(utilisateur.getEmail()).isPresent()){
+        if(utilisateurRepository.findByEmail(utilisateur.getEmail()).isPresent()){
             throw new RuntimeException("Cette adresse mail est déjà utilisée");
         }
 
-        utilisateur = utilisateurRespository.save(utilisateur);
-        validationService.enregister(utilisateur);
+        // On enregistre et on récupère l'objet avec son ID généré
+        Utilisateur utilisateurSauvegarde = utilisateurRepository.save(utilisateur);
+        validationService.enregister(utilisateurSauvegarde);
     }
 
     public List<Utilisateur> getAllUsers(){
-        return utilisateurRespository.findAll();
+        return utilisateurRepository.findAll();
     }
 
     public Utilisateur getUserById(int id){
-        return utilisateurRespository.findById(id)
+        return utilisateurRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
     }
 
     public Utilisateur getUserByEmail(String email){
-        return utilisateurRespository.findByEmail(email)
+        return utilisateurRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
     }
 
     public List<Utilisateur> getUsersByRole(Role role){
-        return utilisateurRespository.findByRole(role);
+        return utilisateurRepository.findByRole(role);
     }
 
     public void activation(Map<String,String> activation){
@@ -59,26 +61,24 @@ public class UtilisateurService {
             throw new RuntimeException("Votre code a expiré");
         }
 
-        Utilisateur utilisateurActive = utilisateurRespository.findById(validation.getUtilisateur().getId())
+        Utilisateur utilisateurActive = utilisateurRepository.findById(validation.getUtilisateur().getId())
                 .orElseThrow(() -> new RuntimeException("Utilisateur inconnu"));
 
         utilisateurActive.setActif(true);
-        utilisateurRespository.save(utilisateurActive);
+        utilisateurRepository.save(utilisateurActive);
 
         validation.setActivation(Instant.now());
         validationService.updateValidation(validation);
     }
 
-    // Nouvelle methode pour redemander un code
     public void resendActivation(String email){
-        Utilisateur utilisateur = utilisateurRespository.findByEmail(email)
+        Utilisateur utilisateur = utilisateurRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Utilisateur introuvable"));
 
         if(utilisateur.isActif()){
             throw new RuntimeException("Utilisateur déjà activé");
         }
 
-
-        validationService.enregister(utilisateur); // genere et envoie un nouveau code
+        validationService.enregister(utilisateur);
     }
 }

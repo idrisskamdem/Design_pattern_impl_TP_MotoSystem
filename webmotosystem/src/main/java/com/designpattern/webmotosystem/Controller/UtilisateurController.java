@@ -25,7 +25,8 @@ import java.util.Map;
 @Slf4j
 @RestController
 @AllArgsConstructor
-@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+@CrossOrigin(origins = "*")
+// @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 public class UtilisateurController {
 
     private final UtilisateurService utilisateurService;
@@ -33,49 +34,53 @@ public class UtilisateurController {
     private final JwtService jwtService;
 
     @PostMapping(path = "/inscription")
-    public void inscription(@RequestBody Utilisateur utilisateur){
+    public void inscription(@RequestBody Utilisateur utilisateur) {
         log.info("Inscription utilisateur {}", utilisateur.getEmail());
         utilisateurService.inscription(utilisateur);
     }
 
     @PostMapping(path = "/activation")
-    public void activation(@RequestBody Map<String,String> activation){
+    public void activation(@RequestBody Map<String, String> activation) {
         utilisateurService.activation(activation);
     }
 
     // Nouveau endpoint pour redemander un code
     @PostMapping(path = "/resend-activation")
-    public void resendActivation(@RequestBody Map<String,String> request){
+    public void resendActivation(@RequestBody Map<String, String> request) {
         String email = request.get("email");
         log.info("Resend activation for {}", email);
         utilisateurService.resendActivation(email);
     }
+
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest request) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()) );
-        UserDetails user = (UserDetails) authentication.getPrincipal();
-        String token = jwtService.generateToken(user.getUsername());
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword()));
+
+        Utilisateur utilisateur = utilisateurService.getUserByEmail(request.getEmail());
+        String token = jwtService.generateToken(utilisateur.getId(), utilisateur.getEmail(),
+                utilisateur.getRole().name());
+
         return new LoginResponse(token, "Bearer", jwtService.getExpirationSeconds());
     }
 
     @GetMapping("/{id}")
-    public Utilisateur getUserById(@PathVariable int id){
+    public Utilisateur getUserById(@PathVariable int id) {
         return utilisateurService.getUserById(id);
     }
 
     @GetMapping("/email/{email}")
-    public Utilisateur getUserByEmail(@PathVariable String email){
+    public Utilisateur getUserByEmail(@PathVariable String email) {
         return utilisateurService.getUserByEmail(email);
     }
 
     @GetMapping
-    public List<Utilisateur> getAllUsers(){
+    public List<Utilisateur> getAllUsers() {
         return utilisateurService.getAllUsers();
     }
 
     @GetMapping("/searchByRole/{role}")
-    public List<Utilisateur> getUsersByRole(@PathVariable Role role){
+    public List<Utilisateur> getUsersByRole(@PathVariable Role role) {
         return utilisateurService.getUsersByRole(role);
     }
 }

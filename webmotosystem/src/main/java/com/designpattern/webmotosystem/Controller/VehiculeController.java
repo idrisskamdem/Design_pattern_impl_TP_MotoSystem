@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/vehicules")
+@CrossOrigin(origins = "*")
 public class VehiculeController {
 
     private final VehiculeService vehiculeService;
@@ -209,7 +210,7 @@ public class VehiculeController {
         return ResponseEntity.noContent().build();
     }
 
-    // -------------------- Méthode utilitaire --------------------
+
 
     private List<String> storeImages(List<MultipartFile> images) throws IOException, UnsupportedFileTypeException {
         List<String> imageNames = new ArrayList<>();
@@ -220,4 +221,50 @@ public class VehiculeController {
         }
         return imageNames;
     }
+
+    @GetMapping("/search/prix")
+    public List<Vehicule> searchByPrix(@RequestParam(defaultValue = "asc") String order) {
+        if ("desc".equalsIgnoreCase(order)) {
+            return vehiculeService.findAllOrderByPrixDesc();
+        }
+        return vehiculeService.findAllOrderByPrixAsc();
+    }
+    // -------------------- RECHERCHE PAR VEHICULES SOLDEES --------------------
+
+    @GetMapping("/search/soldees")
+    public List<Vehicule> searchVehiculesSoldees() {
+        return vehiculeService.findByEstSoldeTrue();
+    }
+
+// -------------------- RECHERCHE PAR ANNEE --------------------
+
+    @GetMapping("/search/annee")
+    public List<Vehicule> searchByAnnee(@RequestParam int annee) {
+        return vehiculeService.findByAnnee(annee);
+    }
+    // -------------------- MISE A JOUR VEHICULES SOLDEES --------------------
+
+    @PutMapping("/update-soldees")
+    public ResponseEntity<Void> updateVehiculesSoldees() {
+        vehiculeService.mettreAJourVehiculesSoldees();
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping("/search/modele")
+    public List<Vehicule> searchByModele(@RequestParam String modele) {
+        return vehiculeService.findByModele(modele);
+    }
+
+    @GetMapping("/search/marque")
+    public List<Vehicule> searchByMarque(@RequestParam String marque) {
+        return vehiculeService.findByMarque(marque);
+    }
+
+
+    @GetMapping("/search/keywords")
+    public List<Vehicule> searchByKeywords(@RequestParam String query) {
+        return vehiculeService.searchByKeywords(query);
+    }
+
 }

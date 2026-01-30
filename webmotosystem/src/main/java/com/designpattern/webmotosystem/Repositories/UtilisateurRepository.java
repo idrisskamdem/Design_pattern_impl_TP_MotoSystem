@@ -9,8 +9,12 @@ import java.util.Optional;
 import java.util.List;
 
 @Repository
-public interface UtilisateurRespository extends JpaRepository<Utilisateur,Integer> {
+public interface UtilisateurRepository extends JpaRepository<Utilisateur, Integer> {
+    
     Optional<Utilisateur> findByEmail(String email);
 
     List<Utilisateur> findByRole(Role role);
+
+    // Ajouté pour permettre au service de trouver les infos de la société vendeuse
+    Optional<Utilisateur> findByRaisonSociale(String raisonSociale);
 }

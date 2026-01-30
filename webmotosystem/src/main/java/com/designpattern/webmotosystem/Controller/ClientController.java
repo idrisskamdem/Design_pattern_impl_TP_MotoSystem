@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @AllArgsConstructor
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "/clients", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ClientController {
 

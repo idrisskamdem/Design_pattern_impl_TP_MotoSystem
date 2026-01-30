@@ -1,32 +1,40 @@
 package com.designpattern.webmotosystem.Entities.documents.builder;
 
+import com.designpattern.webmotosystem.Entities.Utilisateur;
+import com.designpattern.webmotosystem.Entities.Vehicule.Vehicule;
+import com.designpattern.webmotosystem.Entities.Commande.Commande;
 import com.designpattern.webmotosystem.Entities.documents.adapter.Document;
 import com.designpattern.webmotosystem.Entities.documents.adapter.PdfAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class LiassePDFBuilder implements LiasseBuilder {
     private List<Document> documents = new ArrayList<>();
 
+    private final Utilisateur client;
+    private final Vehicule vehicule;
+    private final Commande commande;
+
+    public LiassePDFBuilder(Utilisateur client, Vehicule vehicule, Commande commande) {
+        this.client = client;
+        this.vehicule = vehicule;
+        this.commande = commande;
+    }
+
     @Override
     public void buildDemandeImmatriculation() {
-        Document doc = new PdfAdapter();
-        doc.setContent("Demande d'immatriculation");
-        documents.add(doc);
+        documents.add(new PdfAdapter("Demande d'immatriculation", client, vehicule, commande));
     }
 
     @Override
     public void buildCertificatCession() {
-        Document doc = new PdfAdapter();
-        doc.setContent("Certificat de cession");
-        documents.add(doc);
+        documents.add(new PdfAdapter("Certificat de cession", client, vehicule, commande));
     }
 
     @Override
     public void buildBonCommande() {
-        Document doc = new PdfAdapter();
-        doc.setContent("Bon de commande");
-        documents.add(doc);
+        documents.add(new PdfAdapter("Bon de commande", client, vehicule, commande));
     }
 
     @Override
