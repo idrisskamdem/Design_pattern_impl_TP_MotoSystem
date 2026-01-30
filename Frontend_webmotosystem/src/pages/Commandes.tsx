@@ -71,7 +71,7 @@ export default function Commandes() {
             <h1 className="text-2xl font-bold mb-4">Aucune commande</h1>
             <p className="text-muted-foreground mb-8">Vous n'avez pas encore passé de commande.</p>
             <Button className="gradient-primary shadow-primary" asChild>
-              <Link to="/vehicules">Parcourir les véhicules</Link>
+              <Link to="/catalogue">Parcourir les véhicules</Link>
             </Button>
           </div>
         </div>

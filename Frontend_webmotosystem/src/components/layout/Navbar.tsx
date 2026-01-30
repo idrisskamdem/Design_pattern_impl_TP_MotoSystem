@@ -72,7 +72,7 @@ export function Navbar() {
             <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center shadow-primary">
               <span className="text-xl">🚗</span>
             </div>
-            <span className="font-display text-2xl text-gradient">My_Car</span>
+            <span className="font-display text-2xl text-gradient">WebMotoSystem</span>
           </Link>
 
           {/* Desktop Navigation */}

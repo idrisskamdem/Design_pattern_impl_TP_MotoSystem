@@ -22,7 +22,7 @@ export function useDecoratedVehicle(name: string, basePrice: number) {
   const addOption = (option: Option) => {
     let newVehicle = vehicle;
 
-    // 🔹 Vérifier incompatibilités cuir/sport
+    //  Vérifier incompatibilités cuir/sport
     if (
       (option.code === "SIEGES_CUIR" && options.find(o => o.code === "SIEGES_SPORT")) ||
       (option.code === "SIEGES_SPORT" && options.find(o => o.code === "SIEGES_CUIR"))
@@ -31,10 +31,10 @@ export function useDecoratedVehicle(name: string, basePrice: number) {
       return;
     }
 
-    // 🔹 Vérifier si déjà ajoutée
+    //  Vérifier si déjà ajoutée
     if (options.find(o => o.code === option.code)) return;
 
-    // 🔹 Appliquer le décorateur
+    //  Appliquer le décorateur
     if (option.code === "SIEGES_CUIR") newVehicle = new SiegesCuirDecorator(vehicle);
     if (option.code === "SIEGES_SPORT") newVehicle = new SiegesSportDecorator(vehicle);
     if (option.code === "GPS") newVehicle = new GpsDecorator(vehicle);
@@ -47,7 +47,7 @@ export function useDecoratedVehicle(name: string, basePrice: number) {
 
   const removeOption = (code: string) => {
     setOptions(options.filter(o => o.code !== code));
-    // ⚠️ Ici, tu pourrais reconstruire le véhicule décoré sans cette option
+    //  Ici, tu pourrais reconstruire le véhicule décoré sans cette option
     setVehicle(new BaseVehicle(name, basePrice));
     options
       .filter(o => o.code !== code)

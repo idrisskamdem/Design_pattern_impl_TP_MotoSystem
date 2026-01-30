@@ -137,7 +137,7 @@ const handleLogin = async (e: React.FormEvent) => {
               <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center shadow-primary">
                 <span className="text-2xl">🚗</span>
               </div>
-              <span className="font-display text-3xl text-gradient">My_Car</span>
+              <span className="font-display text-3xl text-gradient">WebMotoSystem</span>
             </Link>
           </div>
 

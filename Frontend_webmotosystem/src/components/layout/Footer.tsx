@@ -39,7 +39,7 @@ export function Footer() {
               <div className="w-10 h-10 rounded-xl gradient-primary flex items-center justify-center">
                 <span className="text-xl">🚗</span>
               </div>
-              <span className="font-display text-2xl text-primary">My_Car</span>
+              <span className="font-display text-2xl text-primary">WebMotoSystem</span>
             </Link>
             <p className="text-background/70 text-sm mb-6">
               Votre partenaire de confiance pour l'achat de véhicules neufs. 
@@ -99,7 +99,7 @@ export function Footer() {
             <ul className="space-y-3">
               <li className="flex items-center gap-3 text-background/70 text-sm">
                 <MapPin className="w-5 h-5 text-primary" />
-                123 Avenue des Véhicules, Paris
+                123, Universite Yaounde 1 , Yaounde
               </li>
               <li>
                 <a
@@ -107,7 +107,7 @@ export function Footer() {
                   className="flex items-center gap-3 text-background/70 hover:text-primary transition-colors text-sm"
                 >
                   <Phone className="w-5 h-5 text-primary" />
-                  +33 1 23 45 67 89
+                  +237 694 907 134
                 </a>
               </li>
               <li>
@@ -116,7 +116,7 @@ export function Footer() {
                   className="flex items-center gap-3 text-background/70 hover:text-primary transition-colors text-sm"
                 >
                   <Mail className="w-5 h-5 text-primary" />
-                  contact@mycar.fr
+                  contact@WebMotoSystem.fr
                 </a>
               </li>
             </ul>
@@ -129,7 +129,7 @@ export function Footer() {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-background/50 text-sm text-center md:text-left">
-              © 2026 My_Car. Tous droits réservés. Projet INF4067.
+              © 2026 WebMotoSystem. Tous droits réservés. Projet INF4067.
             </p>
             <div className="flex gap-6">
               {footerLinks.legal.map((link) => (
