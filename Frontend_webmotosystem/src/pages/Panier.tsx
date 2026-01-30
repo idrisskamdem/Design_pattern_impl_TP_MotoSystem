@@ -17,7 +17,7 @@ export default function CartPage() {
   const token = localStorage.getItem("token");
   const IMAGE_BASE_URL = "http://localhost:8084/api/uploads/";
 
-  // 🔹 Charger le panier
+  //  Charger le panier
   useEffect(() => {
     const fetchPanier = async () => {
       try {
@@ -37,7 +37,7 @@ export default function CartPage() {
   }, [utilisateurId, token]);
   useEffect(() => { console.log("Panier reçu :", panier); }, [panier]);
 
-  // 🔹 Retirer un article
+  //  Retirer un article
   const retirerArticle = async (articleId: number) => {
     try {
       const response = await fetch(
@@ -56,7 +56,7 @@ export default function CartPage() {
     }
   };
 
-  // 🔹 Retirer une option
+  //  Retirer une option
   const retirerOption = async (optionChoisieId: number) => {
     try {
       const response = await fetch(
@@ -75,7 +75,7 @@ export default function CartPage() {
     }
   };
 
-  // 🔹 Undo / Redo
+  //  Undo / Redo
   const undo = async () => {
     const response = await fetch(`http://localhost:8084/api/panier/${utilisateurId}/undo`, {
       method: "POST",

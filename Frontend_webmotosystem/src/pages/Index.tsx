@@ -173,28 +173,7 @@ const mapToVehicleCardFromMock = (m: any): Vehicle => {
                 Découvrez notre sélection exclusive d'automobiles et scooters. Essence ou électrique, trouvez le véhicule qui vous correspond.
               </p>
 
-              <div className="flex gap-2 mb-8 max-w-md">
-                <div className="relative flex-1">
-                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input placeholder="Rechercher un véhicule..." className="pl-10 h-12 bg-card border-0 shadow-md" />
-                </div>
-                <Button size="lg" className="gradient-primary shadow-primary h-12 px-6">Rechercher</Button>
-              </div>
-
-              <div className="flex gap-8">
-                <div>
-                  <p className="text-3xl font-bold text-primary">500+</p>
-                  <p className="text-sm text-muted-foreground">Véhicules</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-bold text-secondary">50+</p>
-                  <p className="text-sm text-muted-foreground">Marques</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-bold text-accent">10k+</p>
-                  <p className="text-sm text-muted-foreground">Clients satisfaits</p>
-                </div>
-              </div>
+            
             </div>
 
             <div className="relative animate-fade-in hidden lg:block">

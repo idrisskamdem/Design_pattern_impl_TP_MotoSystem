@@ -4,11 +4,11 @@ import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ChevronLeft, ShoppingCart, Heart } from "lucide-react"; // Retrait de Check
+import { ChevronLeft, ShoppingCart, Heart, Trash } from "lucide-react"; // Retrait de Check
 import { cn } from "@/lib/utils";
 import { useToast } from "@/hooks/use-toast";
 
-// 🔹 Import du hook Decorator (assure-toi du bon chemin)
+//  Import du hook Decorator (assure-toi du bon chemin)
 import { useDecoratedVehicle } from "@/decorator/useDecoratedVehicle";
 
 export default function VehicleDetail() {
@@ -37,7 +37,7 @@ export default function VehicleDetail() {
     fetchVehicle();
   }, [id]);
 
-  // 🔹 Hook Decorator
+  //  Hook Decorator
   const { options, addOption, removeOption, getDescription, getPrice } = useDecoratedVehicle(
     vehicle?.modele || "",
     vehicle?.prixBase || 0
@@ -58,7 +58,7 @@ const addToCart = async () => {
   }
 
   try {
-    // 🔹 Étape 1 : Ajouter le véhicule avec image et infos
+    //  Étape 1 : Ajouter le véhicule avec image et infos
     const response = await fetch(
       `http://localhost:8084/api/panier/${utilisateurId}/articles/${id}`,
       {
@@ -78,7 +78,7 @@ const addToCart = async () => {
 
     if (!response.ok) throw new Error("Erreur lors de l'ajout du véhicule");
 
-    // 🔹 Étape 2 : Récupérer le panier mis à jour
+    //  Étape 2 : Récupérer le panier mis à jour
     const panier = await response.json();
 
     // Trouver l'article correspondant au véhicule ajouté
@@ -87,7 +87,7 @@ const addToCart = async () => {
 
     const articleId = article.articleId;
 
-    // 🔹 Étape 3 : Ajouter les options choisies avec l'articleId
+    //  Étape 3 : Ajouter les options choisies avec l'articleId
     for (const opt of options) {
       const optResponse = await fetch(
         `http://localhost:8084/api/panier/${utilisateurId}/articles/${articleId}/options/${opt.code}`,
@@ -104,7 +104,7 @@ const addToCart = async () => {
       }
     }
 
-    // 🔹 Étape 4 : Notification
+    //  Étape 4 : Notification
     toast({
       title: "Ajouté au panier !",
       description: getDescription(),
@@ -242,7 +242,7 @@ const addToCart = async () => {
                         onClick={() => removeOption(o.code)}
                         aria-label={`Retirer ${o.nom}`}
                       >
-                        ❌
+                        <Trash/>
                       </button>
                     </li>
                   ))}

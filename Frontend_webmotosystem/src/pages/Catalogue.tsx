@@ -8,7 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import { Loader2 } from "lucide-react";
 
-// 🔹 Fonction de mapping API → format VehicleCard
+//  Fonction de mapping API → format VehicleCard
 function mapApiVehicle(apiVehicle: any): Vehicle {
   const BASE_URL = "http://localhost:8084"; 
   const typeLower = apiVehicle.typeVehicule?.toLowerCase() || "";
@@ -67,7 +67,7 @@ export default function Catalogue() {
     fetchVehicles();
   }, []);
 
-  // 🔹 Logique de filtrage (sans searchQuery)
+  //  Logique de filtrage (sans searchQuery)
   const filteredVehicles = vehicles.filter((vehicle) => {
     if (filters.types.length > 0 && !filters.types.includes(vehicle.type)) return false;
     if (filters.fuels.length > 0 && !filters.fuels.includes(vehicle.fuelType)) return false;

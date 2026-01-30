@@ -136,20 +136,10 @@ export default function Profil() {
                         Mes commandes
                       </Link>
                     </Button>
-                    <Button variant="ghost" className="w-full justify-start gap-3">
-                      <Heart className="w-5 h-5" />
-                      Mes favoris
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start gap-3">
-                      <CreditCard className="w-5 h-5" />
-                      Moyens de paiement
-                    </Button>
+                   
                   </>
                 )}
-                <Button variant="ghost" className="w-full justify-start gap-3">
-                  <Settings className="w-5 h-5" />
-                  Paramètres
-                </Button>
+        
                 <Separator className="my-2" />
                 <Button 
                   variant="ghost" 
