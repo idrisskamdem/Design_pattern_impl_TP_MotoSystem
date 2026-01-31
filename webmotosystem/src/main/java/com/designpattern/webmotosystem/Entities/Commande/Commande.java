@@ -37,7 +37,7 @@ public abstract class Commande {
     
     private String paysLivraison;
     
-    
+    // ✅ NOUVELLE RELATION : Options de la commande
     @OneToMany(mappedBy = "commande", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OptionCommande> options = new ArrayList<>();
     
@@ -57,7 +57,7 @@ public abstract class Commande {
         this.etatCommande = nouvelEtat;
     }
     
-
+    // ✅ Méthode helper pour ajouter une option
     public void ajouterOption(String code, String nom, double prix) {
         OptionCommande option = new OptionCommande();
         option.setCommande(this);
@@ -67,6 +67,7 @@ public abstract class Commande {
         this.options.add(option);
     }
     
+    // ====== Getters / Setters ======
     public Long getId() { return id; }
     public String getNumCommande() { return numCommande; }
     public void setNumCommande(String numCommande) { this.numCommande = numCommande; }
