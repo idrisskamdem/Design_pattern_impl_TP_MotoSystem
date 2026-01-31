@@ -1,447 +1,136 @@
-Voici un README complet et professionnel pour votre projet :
+````
+#  WebMotoSystem - Plateforme de Vente de Véhicules
 
-```markdown
-# WebMotoSystem - Plateforme de Vente en Ligne de Véhicules
+Application web de vente en ligne de véhicules développée avec **Spring Boot** (backend) et **React + TypeScript** (frontend), illustrant l'implémentation de **11 design patterns** (GoF).
 
-Une application web moderne de vente en ligne de véhicules développée dans le cadre du cours **INF4067 - UML et Design Patterns** à l'Université de Yaoundé I. Le projet illustre l'implémentation de **11 design patterns** dans un contexte réel d'e-commerce automobile.
+##  Contexte du Projet
 
-## Table des matières
+WebMotoSystem est une plateforme e-commerce complète permettant :
+- La consultation d'un catalogue de véhicules (automobiles/scooters, essence/électrique)
+- La gestion d'un panier avec options personnalisables
+- Le passage de commandes avec calcul automatique des taxes
+- La génération de documents officiels (PDF/HTML)
 
-- [Aperçu](#-aperçu)
-- [Fonctionnalités](#-fonctionnalités)
-- [Design Patterns](#-design-patterns)
-- [Technologies](#-technologies)
-- [Architecture](#-architecture)
-- [Installation](#-installation)
-- [Configuration](#-configuration)
-- [Utilisation](#-utilisation)
-- [API Documentation](#-api-documentation)
-- [Captures d'écran](#-captures-décran)
-- [Contributeurs](#-contributeurs)
-- [Licence](#-licence)
+**Projet académique** - Cours INF4067 - UML et Design Patterns (2025-2026)
 
-## Aperçu
-
-WebMotoSystem est une plateforme complète permettant :
-- La consultation d'un **catalogue de véhicules** (automobiles et scooters, essence et électrique)
-- La gestion d'un **panier intelligent** avec options personnalisables
-- Le **passage de commandes** avec calcul automatique des taxes selon le pays
-- La génération de **documents officiels** (PDF/HTML) pour chaque commande
-- La gestion des **clients entreprises** avec leurs filiales
-
-## Fonctionnalités
-
-### Authentification & Autorisation
-- Inscription avec validation par email (code à 6 chiffres)
-- Connexion sécurisée avec JWT
-- Gestion des rôles : Administrateur, Utilisateur, Société, Client
-- Renvoi de code d'activation
-
-### Gestion des Véhicules
-- CRUD complet sur les véhicules
-- Types : Automobile (Essence/Électrique), Scooter (Essence/Électrique)
-- Recherche avancée avec filtres (marque, modèle, année, prix, couleur)
-- Upload d'images multiples par véhicule
-- Système de **soldes automatiques** (véhicules en stock > 3 mois)
-- Gestion du stock en temps réel
-
-### 🛒 Panier Intelligent
-- Ajout/suppression de véhicules
-- Sélection d'options avec gestion des **incompatibilités**
-- Calcul automatique du prix total (véhicule + options)
-- **Undo/Redo** complet (pattern Memento)
-- Sauvegarde persistante par utilisateur
-
-### Commandes
-- Création de commande depuis le panier
-- Types de paiement : **Comptant** (0% frais) ou **Crédit** (10% frais)
-- Calcul automatique des **taxes par pays** (France: 20%, Cameroun: 15%)
-- États : EN_COURS → VALIDEE → LIVREE
-- Conservation des options sélectionnées
-
-### Documents Officiels
-Génération automatique de documents professionnels :
-- **Demande d'immatriculation**
-- **Certificat de cession**
-- **Bon de commande** (avec détail des options et récapitulatif financier)
-
-Formats disponibles :
-- **HTML** : Aperçu stylisé en temps réel
-- **PDF** : Téléchargement pour impression
-
-### Gestion Clients Entreprises
-- Structure hiérarchique : Société → Filiales
-- Calcul automatique de la flotte totale
-- Gestion des commandes groupées
-
-## Design Patterns
-
-Ce projet implémente **11 design patterns** du Gang of Four :
-
-### Patterns de Création
-1. **Abstract Factory** (`FabriqueVehicule`)
-   - Création de familles de véhicules (Essence/Électrique)
-   - Garantit la cohérence des types créés
-
-2. **Builder** (`LiasseBuilder`, `LiasseDirector`)
-   - Construction de liasses de documents (HTML/PDF)
-   - Séparation de la construction et de la représentation
-
-3. **Factory Method** (`CommandeFactoryService`)
-   - Création de commandes (Comptant/Crédit)
-   - Délégation de l'instanciation aux sous-classes
-
-4. **Singleton** (`LiasseDocuments`)
-   - Instance unique de la liasse de documents
-   - Accès global contrôlé
-
-### Patterns Structuraux
-5. **Adapter** (`PdfAdapter`)
-   - Adaptation de la bibliothèque PDFBox
-   - Interface commune avec HtmlDocument
-
-6. **Bridge** (`Formulaire`, `FormsRenderer`)
-   - Séparation abstraction (Formulaire) / implémentation (HTML/PDF)
-   - Évolution indépendante des deux hiérarchies
-
-7. **Composite** (`ClientEntreprise`, `Societe`, `Filiale`)
-   - Structure arborescente des entreprises
-   - Traitement uniforme des sociétés et filiales
-
-### Patterns Comportementaux
-8. **Command** (`PanierCommand`, `AjouterVehiculeCommand`, etc.)
-   - Encapsulation des opérations sur le panier
-   - Support de l'annulation (undo/redo)
-
-9. **Memento** (`PanierMemento`, `PanierCaretaker`)
-   - Sauvegarde/restauration de l'état du panier
-   - Historique des modifications
-
-10. **Strategy** (`TaxeStrategy`, `TaxeFrance`, `TaxeCameroun`)
-    - Algorithmes interchangeables de calcul de taxes
-    - Ajout facile de nouveaux pays
-
-11. **Template Method** (`Commande.calculerTotal()`)
-    - Squelette de l'algorithme de calcul
-    - Points d'extension pour les frais spécifiques
-
-## Technologies
+## Technologies Utilisées
 
 ### Backend
-- **Java 17** - Langage principal
-- **Spring Boot 3.2+** - Framework web
-- **Spring Security** - Authentification/Autorisation
-- **Spring Data JPA** - Persistence des données
-- **Hibernate** - ORM
-- **MySQL 8.0** - Base de données
-- **JWT (jjwt 0.12.3)** - Gestion des tokens
-- **Apache PDFBox 2.0.27** - Génération de PDF
-- **Lombok** - Réduction du boilerplate
-- **Maven** - Gestion des dépendances
+- Java 17
+- Spring Boot 3.2+
+- MySQL 8.0
+- JWT (authentification)
+- Apache PDFBox (génération PDF)
+- Maven
 
 ### Frontend
-- **React 18** - Bibliothèque UI
-- **TypeScript** - Typage statique
-- **Vite** - Build tool
-- **Tailwind CSS** - Framework CSS
-- **Shadcn/ui** - Composants UI
-- **Lucide React** - Icônes
-- **React Router** - Routing
+- React 18
+- TypeScript
+- Vite
+- Tailwind CSS
+- Shadcn/ui
 
-### DevOps
-- **Git** - Contrôle de version
-- **GitHub** - Hébergement du code
-- **XAMPP/LAMPP** - Serveur local (développement)
+## Prérequis
 
-## Architecture
+Avant de commencer, assurez-vous d'avoir installé :
 
-### Architecture Logique (3-Tiers)
+- **Java JDK 17+** → [Télécharger](https://www.oracle.com/java/technologies/downloads/)
+- **Node.js 18+** et npm → [Télécharger](https://nodejs.org/)
+- **MySQL 8.0+** ou **XAMPP/LAMPP** → [Télécharger](https://www.apachefriends.org/)
+- **Maven** (généralement inclus avec les IDE Java)
+- **Git** → [Télécharger](https://git-scm.com/)
 
-```
-┌─────────────────────────────────────────┐
-│         Couche Présentation             │
-│   (React + TypeScript + Tailwind)       │
-│  - Pages (Catalogue, Panier, etc.)      │
-│  - Composants réutilisables             │
-└──────────────┬──────────────────────────┘
-               │ HTTP/REST (JSON)
-               │ JWT Authentication
-┌──────────────▼──────────────────────────┐
-│          Couche Métier                   │
-│      (Spring Boot + Services)            │
-│  - Controllers (API REST)                │
-│  - Services (Logique métier)             │
-│  - Security (JWT + BCrypt)               │
-│  - Factory/Strategy/Command              │
-└──────────────┬──────────────────────────┘
-               │ JPA/Hibernate
-               │
-┌──────────────▼──────────────────────────┐
-│       Couche Persistence                 │
-│    (Spring Data JPA + MySQL)             │
-│  - Repositories                          │
-│  - Entities (JPA)                        │
-│  - Base de données relationnelle         │
-└──────────────────────────────────────────┘
-```
+## Installation et Démarrage
 
-### Architecture Technique
-
-```
-webmotosystem/
-├── backend/                          # Application Spring Boot
-│   ├── src/main/java/
-│   │   └── com.designpattern.webmotosystem/
-│   │       ├── Controller/           # REST Controllers
-│   │       │   ├── VehiculeController.java
-│   │       │   ├── CommandeController.java
-│   │       │   ├── PanierController.java
-│   │       │   ├── DocumentController.java
-│   │       │   └── UtilisateurController.java
-│   │       ├── Services/             # Logique métier
-│   │       │   ├── VehiculeService.java
-│   │       │   ├── CommandeService.java
-│   │       │   ├── PanierService.java
-│   │       │   ├── DocumentService.java
-│   │       │   ├── UtilisateurService.java
-│   │       │   ├── ValidationService.java
-│   │       │   └── taxe/
-│   │       │       ├── TaxeStrategy.java
-│   │       │       ├── TaxeFrance.java
-│   │       │       ├── TaxeCameroun.java
-│   │       │       └── TaxeStrategyFactory.java
-│   │       ├── Entities/             # Entités JPA
-│   │       │   ├── Vehicule/
-│   │       │   │   ├── Vehicule.java (abstract)
-│   │       │   │   ├── Automobile.java (abstract)
-│   │       │   │   ├── Scooter.java (abstract)
-│   │       │   │   ├── AutomobileEssence.java
-│   │       │   │   ├── AutomobileElectrique.java
-│   │       │   │   ├── ScooterEssence.java
-│   │       │   │   └── ScooterElectrique.java
-│   │       │   ├── Commande/
-│   │       │   │   ├── Commande.java (abstract)
-│   │       │   │   ├── CommandeComptant.java
-│   │       │   │   ├── CommandeCredit.java
-│   │       │   │   ├── OptionCommande.java
-│   │       │   │   ├── EtatCommande.java (enum)
-│   │       │   │   └── EnumCommande.java (enum)
-│   │       │   ├── client/
-│   │       │   │   ├── ClientEntreprise.java (interface)
-│   │       │   │   ├── Societe.java
-│   │       │   │   └── Filiale.java
-│   │       │   ├── panier/
-│   │       │   │   ├── Panier.java
-│   │       │   │   ├── ArticlePanier.java
-│   │       │   │   ├── OptionChoisie.java
-│   │       │   │   ├── OptionProduit.java
-│   │       │   │   ├── command/
-│   │       │   │   │   ├── PanierCommand.java (interface)
-│   │       │   │   │   ├── AjouterVehiculeCommand.java
-│   │       │   │   │   ├── AjouterOptionCommand.java
-│   │       │   │   │   ├── RetirerArticleCommand.java
-│   │       │   │   │   └── RetirerOptionCommand.java
-│   │       │   │   └── memento/
-│   │       │   │       ├── PanierMemento.java
-│   │       │   │       └── PanierCaretaker.java
-│   │       │   ├── documents/
-│   │       │   │   ├── adapter/
-│   │       │   │   │   ├── Document.java (interface)
-│   │       │   │   │   ├── HtmlDocument.java
-│   │       │   │   │   ├── PdfAdapter.java
-│   │       │   │   │   └── PdfLibrary.java
-│   │       │   │   ├── bridge/
-│   │       │   │   │   ├── FormsRenderer.java (interface)
-│   │       │   │   │   ├── Formulaire.java (abstract)
-│   │       │   │   │   ├── HTMLRenderer.java
-│   │       │   │   │   ├── PDFRenderer.java
-│   │       │   │   │   ├── FormulaireClient.java
-│   │       │   │   │   ├── FormulaireCommande.java
-│   │       │   │   │   └── FormulaireFacture.java
-│   │       │   │   ├── builder/
-│   │       │   │   │   ├── LiasseBuilder.java (interface)
-│   │       │   │   │   ├── LiasseDirector.java
-│   │       │   │   │   ├── LiasseHTMLBuilder.java
-│   │       │   │   │   └── LiassePDFBuilder.java
-│   │       │   │   └── singleton/
-│   │       │   │       └── LiasseDocuments.java
-│   │       │   ├── Utilisateur.java
-│   │       │   ├── Validation.java
-│   │       │   ├── Adresse.java
-│   │       │   └── Role.java (enum)
-│   │       ├── Repositories/         # Accès données
-│   │       │   ├── VehiculeRepository.java
-│   │       │   ├── CommandeRepository.java
-│   │       │   ├── PanierRepository.java
-│   │       │   ├── ArticlePanierRepository.java
-│   │       │   ├── OptionProduitRepository.java
-│   │       │   ├── OptionChoisieRepository.java
-│   │       │   ├── OptionCommandeRepository.java
-│   │       │   ├── UtilisateurRepository.java
-│   │       │   └── ValidationRepository.java
-│   │       ├── Security/             # Configuration sécurité
-│   │       │   ├── ConfigSecurityApp.java
-│   │       │   ├── JwtService.java
-│   │       │   ├── JwtAuthenticationFilter.java
-│   │       │   ├── CustomUserDetailsService.java
-│   │       │   └── WebConfig.java
-│   │       ├── factory/              # Factory patterns
-│   │       │   ├── FabriqueVehicule.java (abstract)
-│   │       │   ├── FabriqueVehiculeEssence.java
-│   │       │   ├── FabriqueVehiculeElectrique.java
-│   │       │   └── CommandeFactoryService.java
-│   │       ├── DTO/                  # Data Transfer Objects
-│   │       │   ├── LoginRequest.java
-│   │       │   ├── LoginResponse.java
-│   │       │   ├── CommandeResponse.java
-│   │       │   ├── VehiculeCommandeResponse.java
-│   │       │   └── panier/
-│   │       │       └── PanierResponse.java
-│   │       ├── Mappers/              # Entity ↔ DTO
-│   │       │   ├── CommandeMapper.java
-│   │       │   └── PanierMapper.java
-│   │       ├── fileManager/          # Gestion fichiers
-│   │       │   └── FileFilter.java
-│   │       ├── utils/
-│   │       │   └── FileUrlBuilder.java
-│   │       └── exception/
-│   │           └── UnsupportedFileTypeException.java
-│   ├── src/main/resources/
-│   │   ├── application.properties    # Configuration Spring
-│   │   └── static/uploads/           # Stockage images
-│   └── pom.xml                       # Dépendances Maven
-│
-└── frontend/                         # Application React
-    ├── src/
-    │   ├── components/               # Composants réutilisables
-    │   │   ├── layout/
-    │   │   │   └── Layout.tsx
-    │   │   └── ui/                   # Shadcn components
-    │   ├── pages/                    # Pages de l'application
-    │   │   ├── Catalogue.tsx
-    │   │   ├── Panier.tsx
-    │   │   ├── Commandes.tsx
-    │   │   ├── Documents.tsx
-    │   │   ├── Connexion.tsx
-    │   │   └── Inscription.tsx
-    │   ├── lib/
-    │   │   └── utils.ts
-    │   ├── App.tsx
-    │   └── main.tsx
-    ├── package.json
-    ├── tsconfig.json
-    ├── vite.config.ts
-    └── tailwind.config.js
-```
-
-## Installation
-
-### Prérequis
-
-- **Java JDK 17+** ([Télécharger](https://www.oracle.com/java/technologies/downloads/))
-- **Node.js 18+** et npm ([Télécharger](https://nodejs.org/))
-- **MySQL 8.0+** ou **XAMPP/LAMPP** ([Télécharger](https://www.apachefriends.org/))
-- **Maven 3.6+** (inclus avec la plupart des IDE Java)
-- **Git** ([Télécharger](https://git-scm.com/))
-
-### 1️Cloner le projet
-
+###  Cloner le Projet
 ```bash
 git clone https://github.com/votre-username/webmotosystem.git
 cd webmotosystem
 ```
 
-### Configuration de la base de données
+###  Configurer la Base de Données
 
-#### Option A : Avec XAMPP/LAMPP (Recommandé pour le développement)
+#### Démarrer MySQL
 
+**Avec XAMPP (Linux)** :
 ```bash
-# Démarrer XAMPP (Linux)
 sudo /opt/lampp/lampp start
-
-# Démarrer XAMPP (Windows)
-# Ouvrir le panneau de contrôle XAMPP et démarrer Apache + MySQL
-
-# Démarrer XAMPP (macOS)
-sudo /Applications/XAMPP/xamppfiles/mampp start
 ```
 
-#### Option B : MySQL autonome
+**Avec XAMPP (Windows)** :
+- Ouvrir le panneau de contrôle XAMPP
+- Démarrer Apache et MySQL
 
+**Avec MySQL autonome** :
 ```bash
-# Démarrer MySQL
 sudo systemctl start mysql      # Linux
 brew services start mysql       # macOS
 # Utiliser les services Windows  # Windows
 ```
 
-#### Créer la base de données
+#### Importer la Base de Données
 
+1. **Accéder à phpMyAdmin** : `http://localhost/phpmyadmin`
+2. **Créer une nouvelle base de données** nommée `ecommerce`
+3. **Importer le fichier SQL** :
+   - Cliquez sur la base `ecommerce`
+   - Allez dans l'onglet **"Importer"**
+   - Sélectionnez le fichier `ecommerce.sql` (situé à la **racine du projet**)
+   - Cliquez sur **"Exécuter"**
+
+**Ou via la ligne de commande** :
 ```bash
-# Se connecter à MySQL
-mysql -u root -p
-
-# Créer la base de données
-CREATE DATABASE webmotosystem CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-EXIT;
+mysql -u root -p ecommerce < ecommerce.sql
 ```
 
-### Configuration du Backend
+>  **Important** : Le fichier `ecommerce.sql` contient toutes les tables et données nécessaires. Sans cette importation, l'application ne fonctionnera pas correctement.
 
-#### Créer le fichier de configuration
+###  Configuration du Backend
 
-Créez le fichier `backend/src/main/resources/application.properties` :
+#### Vérifier la Configuration
 
+Ouvrez le fichier `backend/src/main/resources/application.properties` et vérifiez les paramètres :
 ```properties
-# Configuration du serveur
+# Port du serveur
 server.port=8084
 
-# Configuration de la base de données
-spring.datasource.url=jdbc:mysql://localhost:3306/webmotosystem?useSSL=false&serverTimezone=UTC
+# Base de données (vérifiez le nom de la BD : ecommerce)
+spring.datasource.url=jdbc:mysql://localhost:3306/ecommerce?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
 spring.datasource.username=root
 spring.datasource.password=
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
-# Configuration JPA/Hibernate
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
-spring.jpa.properties.hibernate.format_sql=true
-
-# Configuration JWT
-jwt.secret=votreClefSecreteTresLongueEtSecuriseeIci123456789
-
-# Configuration du stockage de fichiers
-file.upload-dir=./uploads
-spring.servlet.multipart.max-file-size=10MB
-spring.servlet.multipart.max-request-size=10MB
-
-# Configuration CORS
-spring.web.cors.allowed-origins=http://localhost:5173
-spring.web.cors.allowed-methods=GET,POST,PUT,DELETE,OPTIONS
-spring.web.cors.allowed-headers=*
-spring.web.cors.allow-credentials=true
+# Context path
+server.servlet.context-path=/api
 ```
 
-#### Compiler et lancer le backend
+>  **Note** : Si votre utilisateur MySQL n'est pas `root` ou si vous avez un mot de passe, modifiez les lignes `username` et `password` en conséquence.
 
+#### Créer le Dossier Uploads
+```bash
+mkdir backend/uploads
+```
+
+#### Lancer le Backend
 ```bash
 cd backend
 
 # Compiler le projet
 mvn clean install
 
-# Lancer l'application
+# Démarrer l'application
 mvn spring-boot:run
-
-# Ou avec Java directement
-java -jar target/webmotosystem-0.0.1-SNAPSHOT.jar
 ```
 
-Le backend sera accessible sur `http://localhost:8084`
+ **Le backend est prêt** quand vous voyez :
+```
+Started WebmotosystemApplication in X.XXX seconds
+```
 
-### Configuration du Frontend
+**Accès** : `http://localhost:8084/api`
 
+###  Configuration du Frontend
+
+Ouvrez un **nouveau terminal** (laissez le backend tourner) :
 ```bash
 cd frontend
 
@@ -450,362 +139,219 @@ npm install
 
 # Lancer le serveur de développement
 npm run dev
-
-# Build pour la production (optionnel)
-npm run build
 ```
 
-Le frontend sera accessible sur `http://localhost:5173`
-
-## Configuration
-
-### Variables d'environnement Backend
-
-Créez un fichier `.env` (optionnel, pour la production) :
-
-```env
-DB_HOST=localhost
-DB_PORT=3306
-DB_NAME=webmotosystem
-DB_USER=root
-DB_PASSWORD=
-JWT_SECRET=votreClefSecreteTresLongueEtSecuriseeIci123456789
-UPLOAD_DIR=./uploads
+ **Le frontend est prêt** quand vous voyez :
+```
+➜  Local:   http://localhost:5173/
 ```
 
-### Variables d'environnement Frontend
+**Accès** : `http://localhost:5173`
 
-Créez un fichier `frontend/.env` :
+##  Utilisation de l'Application
 
-```env
-VITE_API_URL=http://localhost:8084/api
-```
-
-### Configuration de l'email (optionnel)
-
-Pour l'envoi d'emails de validation, ajoutez dans `application.properties` :
-
-```properties
-# Configuration email (exemple avec Gmail)
-spring.mail.host=smtp.gmail.com
-spring.mail.port=587
-spring.mail.username=votre-email@gmail.com
-spring.mail.password=votre-mot-de-passe-application
-spring.mail.properties.mail.smtp.auth=true
-spring.mail.properties.mail.smtp.starttls.enable=true
-```
-
-## Utilisation
-
-### 1. Inscription et Connexion
+### 1. Inscription
 
 1. Accédez à `http://localhost:5173`
 2. Cliquez sur **"Inscription"**
-3. Remplissez le formulaire :
-   - Nom complet
-   - Email
-   - Mot de passe
-   - Adresse (ville, pays, téléphone)
-4. Un code de validation à 6 chiffres sera affiché dans la console backend
+3. Remplissez le formulaire
+4. **Récupérez le code de validation** dans la **console du backend** (6 chiffres)
 5. Entrez le code pour activer votre compte
-6. Connectez-vous avec vos identifiants
 
-### 2. Parcourir le catalogue
+### 2. Connexion
 
-1. Naviguez dans le **catalogue de véhicules**
-2. Utilisez les **filtres** :
-   - Par prix (croissant/décroissant)
-   - Par marque
-   - Par modèle
-   - Par année
-   - Véhicules soldés uniquement
-3. Recherche avancée avec opérateurs logiques :
-   ```
-   marque:Toyota AND modele:Corolla
-   marque:Ferrari OR marque:Lamborghini
-   annee:2024 AND marque:Tesla
-   ```
+Connectez-vous avec vos identifiants :
+- Email : votre-email@example.com
+- Mot de passe : votre-mot-de-passe
 
-### 3. Ajouter au panier
+### 3. Explorer le Catalogue
 
-1. Cliquez sur un véhicule pour voir les détails
-2. Cliquez sur **"Ajouter au panier"**
-3. Sélectionnez des **options** (sièges cuir, toit ouvrant, etc.)
-4. Le prix se recalcule automatiquement
-5. Utilisez **Undo/Redo** pour annuler/rétablir des modifications
+- Parcourez les véhicules disponibles
+- Utilisez les filtres (prix, marque, modèle, année)
+- Recherche avancée : `marque:Ferrari AND annee:2024`
 
-### 4. Passer une commande
+### 4. Ajouter au Panier
 
-1. Accédez à votre **panier**
-2. Vérifiez les articles et options
-3. Cliquez sur **"Commander"**
-4. Choisissez :
-   - Type de paiement : **Comptant** ou **Crédit**
-   - Pays de livraison (calcul automatique des taxes)
-5. Validez la commande
+- Cliquez sur un véhicule
+- Ajoutez-le au panier
+- Sélectionnez des options (sièges cuir, toit ouvrant, etc.)
+- Le prix se recalcule automatiquement
 
-### 5. Générer les documents
+### 5. Passer une Commande
 
-1. Allez dans **"Mes commandes"**
-2. Cliquez sur une commande
-3. Accédez à **"Documents"**
-4. Sélectionnez un document :
-   - Demande d'immatriculation
-   - Certificat de cession
-   - Bon de commande
-5. Choisissez le format :
-   - **HTML** : Aperçu stylisé
-   - **PDF** : Téléchargement
+- Accédez à votre panier
+- Cliquez sur **"Commander"**
+- Choisissez le type de paiement (Comptant/Crédit)
+- Sélectionnez le pays de livraison
+- Validez la commande
 
-## API Documentation
+### 6. Générer les Documents
 
-### Authentification
+- Allez dans **"Mes Commandes"**
+- Cliquez sur une commande
+- Accédez à **"Documents"**
+- Téléchargez :
+  - Demande d'immatriculation
+  - Certificat de cession
+  - Bon de commande (avec détail des options)
+- Format : HTML (aperçu) ou PDF (téléchargement)
 
-#### Inscription
-```http
-POST /inscription
-Content-Type: application/json
-
-{
-  "nom": "Jean Dupont",
-  "email": "jean@example.com",
-  "password": "motdepasse123",
-  "adresse": {
-    "pays": "France",
-    "ville": "Paris",
-    "telephone": "+33123456789"
-  },
-  "role": "CLIENT"
-}
+##  Structure du Projet
+```
+webmotosystem/
+├── ecommerce.sql              #  À importer dans MySQL
+├── backend/                   # Application Spring Boot
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/          # Code source Java
+│   │   │   └── resources/     # Configuration
+│   │   └── test/
+│   ├── uploads/               # Dossier pour les images
+│   └── pom.xml               # Dépendances Maven
+│
+└── frontend/                  # Application React
+    ├── src/
+    │   ├── components/        # Composants réutilisables
+    │   ├── pages/            # Pages de l'application
+    │   └── lib/              # Utilitaires
+    ├── package.json          # Dépendances npm
+    └── vite.config.ts        # Configuration Vite
 ```
 
-#### Activation du compte
-```http
-POST /activation
-Content-Type: application/json
+##  Dépannage
 
-{
-  "code": "123456"
-}
-```
+### Problème 1 : Erreur de connexion MySQL
 
-#### Connexion
-```http
-POST /login
-Content-Type: application/json
+**Symptôme** : `Access denied for user 'root'@'localhost'`
 
-{
-  "email": "jean@example.com",
-  "password": "motdepasse123"
-}
-
-Response:
-{
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "type": "Bearer",
-  "expiresIn": 86400
-}
-```
-
-### Véhicules
-
-#### Lister tous les véhicules
-```http
-GET /vehicules
-Authorization: Bearer {token}
-```
-
-#### Créer un véhicule (Automobile Électrique)
-```http
-POST /vehicules/automobile/electrique
-Content-Type: multipart/form-data
-Authorization: Bearer {token}
-
-reference: REF-001
-modele: Model S
-marque: Tesla
-annee: 2024
-couleur: Noir
-qteStock: 5
-prixBase: 89990
-dateArrivee: 2024-01-15
-estSolde: false
-kilometrage: 0
-status: NEUF
-batterieKwh: 100
-images: [file1.jpg, file2.jpg]
-```
-
-#### Rechercher des véhicules
-```http
-GET /vehicules/search/keywords?query=marque:Tesla AND annee:2024
-Authorization: Bearer {token}
-```
-
-### Panier
-
-#### Obtenir le panier
-```http
-GET /api/panier/{utilisateurId}
-Authorization: Bearer {token}
-```
-
-#### Ajouter un véhicule
-```http
-POST /api/panier/{utilisateurId}/articles/{vehiculeId}
-Authorization: Bearer {token}
-```
-
-#### Ajouter une option
-```http
-POST /api/panier/{utilisateurId}/articles/{articleId}/options/{optionCode}
-Authorization: Bearer {token}
-```
-
-#### Undo/Redo
-```http
-POST /api/panier/{utilisateurId}/undo
-POST /api/panier/{utilisateurId}/redo
-Authorization: Bearer {token}
-```
-
-### Commandes
-
-#### Créer une commande depuis le panier
-```http
-POST /commandes/from-panier?typeCommande=COMPTANT&clientId=1&vendeurId=2&cartItemId=5&paysLivraison=France
-Authorization: Bearer {token}
-```
-
-#### Obtenir les commandes d'un client
-```http
-GET /commandes/client/{clientId}
-Authorization: Bearer {token}
-```
-
-### Documents
-
-#### Télécharger un document HTML
-```http
-GET /documents/html/commande/download?orderId=1
-Authorization: Bearer {token}
-```
-
-#### Télécharger un document PDF
-```http
-GET /documents/pdf/commande/download?orderId=1
-Authorization: Bearer {token}
-```
-
-## Captures d'écran
-
-### Page d'accueil
-![Catalogue de véhicules](screenshots/catalogue.png)
-
-### Panier
-![Panier avec options](screenshots/panier.png)
-
-### Documents
-![Génération de documents](screenshots/documents.png)
-
-### Commandes
-![Liste des commandes](screenshots/commandes.png)
-
-## Tests
-
-### Exécuter les tests backend
-
+**Solution** :
 ```bash
-cd backend
-mvn test
-```
+# Se connecter à MySQL
+mysql -u root -p
 
-### Exécuter les tests frontend
-
-```bash
-cd frontend
-npm test
-```
-
-## Déploiement
-
-### Backend (Spring Boot)
-
-```bash
-cd backend
-mvn clean package
-java -jar target/webmotosystem-0.0.1-SNAPSHOT.jar
-```
-
-### Frontend (React)
-
-```bash
-cd frontend
-npm run build
-# Les fichiers de production seront dans le dossier dist/
-```
-
-### Docker (optionnel)
-
-```bash
-# À la racine du projet
-docker-compose up -d
-```
-
-## Dépannage
-
-### Problème de connexion à MySQL
-
-```bash
-# Vérifier que MySQL est démarré
-sudo systemctl status mysql
-
-# Réinitialiser le mot de passe root
-sudo mysql
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'nouveau_mot_de_passe';
+# Dans MySQL
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'votre_mot_de_passe';
 FLUSH PRIVILEGES;
+EXIT;
+
+# Puis modifier application.properties
+spring.datasource.password=votre_mot_de_passe
 ```
 
-### Erreur de port déjà utilisé
+### Problème 2 : Port 8084 déjà utilisé
 
+**Solution** :
 ```bash
-# Backend (port 8084)
+# Trouver le processus
 sudo lsof -i :8084
-sudo kill -9 <PID>
 
-# Frontend (port 5173)
-sudo lsof -i :5173
-sudo kill -9 <PID>
+# Tuer le processus
+sudo kill -9 
+
+# Ou changer le port dans application.properties
+server.port=8085
 ```
 
-### Problème d'upload de fichiers
+### Problème 3 : La base `ecommerce` n'existe pas
 
+**Solution** :
 ```bash
-# Créer le dossier uploads
+# Créer la base manuellement
+mysql -u root -p
+CREATE DATABASE ecommerce CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+EXIT;
+
+# Puis importer le fichier SQL
+mysql -u root -p ecommerce < ecommerce.sql
+```
+
+### Problème 4 : Erreur npm install
+
+**Solution** :
+```bash
+# Nettoyer le cache npm
+npm cache clean --force
+
+# Supprimer node_modules
+rm -rf node_modules package-lock.json
+
+# Réinstaller
+npm install
+```
+
+### Problème 5 : Dossier uploads introuvable
+
+**Solution** :
+```bash
+# Créer le dossier
 mkdir -p backend/uploads
 chmod 755 backend/uploads
 ```
 
-## Contributeurs
+##  Comptes de Test
 
-- **Heil Tchamba Nana** - *Développeur principal* - [@votre-github](https://github.com/votre-username)
+Si la base `ecommerce.sql` contient des données de test :
 
-## Licence
+**Administrateur** :
+- Email : admin@webmoto.com
+- Mot de passe : admin123
 
-Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
+**Client** :
+- Email : client@test.com
+- Mot de passe : client123
 
-## Contexte Académique
+##  Fonctionnalités Principales
 
-Projet réalisé dans le cadre du cours **INF4067 - UML et Design Patterns** (2025-2026) à l'Université de Yaoundé I, sous la direction de [Nom du Professeur].
+-  Authentification JWT sécurisée
+-  Gestion complète des véhicules (CRUD)
+-  Panier intelligent avec options incompatibles
+-  Undo/Redo sur le panier (Pattern Memento)
+-  Calcul automatique des taxes par pays (Pattern Strategy)
+-  Génération de documents PDF/HTML (Patterns Adapter & Builder)
+-  Gestion des sociétés et filiales (Pattern Composite)
+-  Véhicules soldés automatiques
+-  Recherche avancée avec opérateurs logiques
 
-### Objectifs pédagogiques
-- Maîtriser l'application des design patterns du Gang of Four
-- Concevoir une architecture logicielle robuste et maintenable
-- Implémenter un système complet avec authentification, persistance et génération de documents
-- Travailler avec des technologies modernes (Spring Boot, React, JWT)
+##  Design Patterns Implémentés
+
+1. **Abstract Factory** - Création de véhicules
+2. **Builder** - Construction de documents
+3. **Factory Method** - Création de commandes
+4. **Singleton** - Liasse de documents
+5. **Adapter** - Documents PDF
+6. **Bridge** - Formulaires HTML/PDF
+7. **Composite** - Sociétés/Filiales
+8. **Command** - Opérations du panier
+9. **Memento** - Undo/Redo
+10. **Strategy** - Calcul des taxes
+11. **Template Method** - Calcul des commandes
+
 
 ## Remerciements
 
-- **Gang of Four** pour les design patterns fondamentaux
-- **Spring Framework** pour l'excellent framework Java
-- **React Team** pour la bibliothè
+Projet réalisé dans le cadre du cours **INF4067 - UML et Design Patterns** (2025-2026) à l'Université de Yaoundé I.
+
+---
+
+** N'oubliez pas d'importer le fichier `ecommerce.sql` avant de lancer l'application !**
+
+Checklist de Démarrage Rapide  
+Cochez au fur et à mesure :
+
+## Checklist de Démarrage
+
+- [ ] Java 17+ installé
+- [ ] Node.js 18+ installé
+- [ ] MySQL démarré
+- [ ] Base de données `ecommerce` créée
+- [ ] Fichier `ecommerce.sql` importé  **CRITIQUE**
+- [ ] Dossier `backend/uploads` créé
+- [ ] Backend démarré (port 8084)
+- [ ] Frontend démarré (port 5173)
+- [ ] Compte créé et activé
+- [ ] Premier véhicule ajouté au panier
+- [ ] Première commande passée
+- [ ] Documents générés
+
+Si tous les points sont cochés, l'application fonctionne
+````
