@@ -1,17 +1,11 @@
 Voici un README complet et professionnel pour votre projet :
 
 ```markdown
-# 🚗 WebMotoSystem - Plateforme de Vente en Ligne de Véhicules
-
-[![Java](https://img.shields.io/badge/Java-17+-orange.svg)](https://www.oracle.com/java/)
-[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2+-green.svg)](https://spring.io/projects/spring-boot)
-[![React](https://img.shields.io/badge/React-18+-blue.svg)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5+-blue.svg)](https://www.typescriptlang.org/)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+# WebMotoSystem - Plateforme de Vente en Ligne de Véhicules
 
 Une application web moderne de vente en ligne de véhicules développée dans le cadre du cours **INF4067 - UML et Design Patterns** à l'Université de Yaoundé I. Le projet illustre l'implémentation de **11 design patterns** dans un contexte réel d'e-commerce automobile.
 
-## 📋 Table des matières
+## Table des matières
 
 - [Aperçu](#-aperçu)
 - [Fonctionnalités](#-fonctionnalités)
@@ -26,7 +20,7 @@ Une application web moderne de vente en ligne de véhicules développée dans le
 - [Contributeurs](#-contributeurs)
 - [Licence](#-licence)
 
-## 🎯 Aperçu
+## Aperçu
 
 WebMotoSystem est une plateforme complète permettant :
 - La consultation d'un **catalogue de véhicules** (automobiles et scooters, essence et électrique)
@@ -35,15 +29,15 @@ WebMotoSystem est une plateforme complète permettant :
 - La génération de **documents officiels** (PDF/HTML) pour chaque commande
 - La gestion des **clients entreprises** avec leurs filiales
 
-## ✨ Fonctionnalités
+## Fonctionnalités
 
-### 🔐 Authentification & Autorisation
+### Authentification & Autorisation
 - Inscription avec validation par email (code à 6 chiffres)
 - Connexion sécurisée avec JWT
 - Gestion des rôles : Administrateur, Utilisateur, Société, Client
 - Renvoi de code d'activation
 
-### 🚙 Gestion des Véhicules
+### Gestion des Véhicules
 - CRUD complet sur les véhicules
 - Types : Automobile (Essence/Électrique), Scooter (Essence/Électrique)
 - Recherche avancée avec filtres (marque, modèle, année, prix, couleur)
@@ -58,14 +52,14 @@ WebMotoSystem est une plateforme complète permettant :
 - **Undo/Redo** complet (pattern Memento)
 - Sauvegarde persistante par utilisateur
 
-### 📦 Commandes
+### Commandes
 - Création de commande depuis le panier
 - Types de paiement : **Comptant** (0% frais) ou **Crédit** (10% frais)
 - Calcul automatique des **taxes par pays** (France: 20%, Cameroun: 15%)
 - États : EN_COURS → VALIDEE → LIVREE
 - Conservation des options sélectionnées
 
-### 📄 Documents Officiels
+### Documents Officiels
 Génération automatique de documents professionnels :
 - **Demande d'immatriculation**
 - **Certificat de cession**
@@ -75,12 +69,12 @@ Formats disponibles :
 - **HTML** : Aperçu stylisé en temps réel
 - **PDF** : Téléchargement pour impression
 
-### 🏢 Gestion Clients Entreprises
+### Gestion Clients Entreprises
 - Structure hiérarchique : Société → Filiales
 - Calcul automatique de la flotte totale
 - Gestion des commandes groupées
 
-## 🎨 Design Patterns
+## Design Patterns
 
 Ce projet implémente **11 design patterns** du Gang of Four :
 
@@ -131,7 +125,7 @@ Ce projet implémente **11 design patterns** du Gang of Four :
     - Squelette de l'algorithme de calcul
     - Points d'extension pour les frais spécifiques
 
-## 🛠️ Technologies
+## Technologies
 
 ### Backend
 - **Java 17** - Langage principal
@@ -159,7 +153,7 @@ Ce projet implémente **11 design patterns** du Gang of Four :
 - **GitHub** - Hébergement du code
 - **XAMPP/LAMPP** - Serveur local (développement)
 
-## 🏗️ Architecture
+## Architecture
 
 ### Architecture Logique (3-Tiers)
 
@@ -340,7 +334,7 @@ webmotosystem/
     └── tailwind.config.js
 ```
 
-## 🚀 Installation
+## Installation
 
 ### Prérequis
 
@@ -350,14 +344,14 @@ webmotosystem/
 - **Maven 3.6+** (inclus avec la plupart des IDE Java)
 - **Git** ([Télécharger](https://git-scm.com/))
 
-### 1️⃣ Cloner le projet
+### 1️Cloner le projet
 
 ```bash
 git clone https://github.com/votre-username/webmotosystem.git
 cd webmotosystem
 ```
 
-### 2️⃣ Configuration de la base de données
+### Configuration de la base de données
 
 #### Option A : Avec XAMPP/LAMPP (Recommandé pour le développement)
 
@@ -392,7 +386,7 @@ CREATE DATABASE webmotosystem CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 EXIT;
 ```
 
-### 3️⃣ Configuration du Backend
+### Configuration du Backend
 
 #### Créer le fichier de configuration
 
@@ -446,7 +440,7 @@ java -jar target/webmotosystem-0.0.1-SNAPSHOT.jar
 
 Le backend sera accessible sur `http://localhost:8084`
 
-### 4️⃣ Configuration du Frontend
+### Configuration du Frontend
 
 ```bash
 cd frontend
@@ -463,7 +457,7 @@ npm run build
 
 Le frontend sera accessible sur `http://localhost:5173`
 
-## ⚙️ Configuration
+## Configuration
 
 ### Variables d'environnement Backend
 
@@ -501,7 +495,7 @@ spring.mail.properties.mail.smtp.auth=true
 spring.mail.properties.mail.smtp.starttls.enable=true
 ```
 
-## 📖 Utilisation
+## Utilisation
 
 ### 1. Inscription et Connexion
 
@@ -563,7 +557,7 @@ spring.mail.properties.mail.smtp.starttls.enable=true
    - **HTML** : Aperçu stylisé
    - **PDF** : Téléchargement
 
-## 📡 API Documentation
+## API Documentation
 
 ### Authentification
 
@@ -703,7 +697,7 @@ GET /documents/pdf/commande/download?orderId=1
 Authorization: Bearer {token}
 ```
 
-## 📸 Captures d'écran
+## Captures d'écran
 
 ### Page d'accueil
 ![Catalogue de véhicules](screenshots/catalogue.png)
@@ -717,7 +711,7 @@ Authorization: Bearer {token}
 ### Commandes
 ![Liste des commandes](screenshots/commandes.png)
 
-## 🧪 Tests
+## Tests
 
 ### Exécuter les tests backend
 
@@ -733,7 +727,7 @@ cd frontend
 npm test
 ```
 
-## 📦 Déploiement
+## Déploiement
 
 ### Backend (Spring Boot)
 
@@ -758,7 +752,7 @@ npm run build
 docker-compose up -d
 ```
 
-## 🔧 Dépannage
+## Dépannage
 
 ### Problème de connexion à MySQL
 
@@ -792,15 +786,15 @@ mkdir -p backend/uploads
 chmod 755 backend/uploads
 ```
 
-## 🤝 Contributeurs
+## Contributeurs
 
 - **Heil Tchamba Nana** - *Développeur principal* - [@votre-github](https://github.com/votre-username)
 
-## 📄 Licence
+## Licence
 
 Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
-## 🎓 Contexte Académique
+## Contexte Académique
 
 Projet réalisé dans le cadre du cours **INF4067 - UML et Design Patterns** (2025-2026) à l'Université de Yaoundé I, sous la direction de [Nom du Professeur].
 
@@ -810,7 +804,7 @@ Projet réalisé dans le cadre du cours **INF4067 - UML et Design Patterns** (20
 - Implémenter un système complet avec authentification, persistance et génération de documents
 - Travailler avec des technologies modernes (Spring Boot, React, JWT)
 
-## 🙏 Remerciements
+## Remerciements
 
 - **Gang of Four** pour les design patterns fondamentaux
 - **Spring Framework** pour l'excellent framework Java
